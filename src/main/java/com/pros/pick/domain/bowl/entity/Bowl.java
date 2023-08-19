@@ -32,8 +32,8 @@ public class Bowl {
 	@ManyToOne
 	private Shop shop;
 
-	@Enumerated(STRING)
-	private Category category;
+//	@Enumerated(STRING)
+//	private Category category;
 
 	@ElementCollection
 	@CollectionTable(name = "bowl_size_counts", joinColumns = @JoinColumn(name = "bowl_id"))

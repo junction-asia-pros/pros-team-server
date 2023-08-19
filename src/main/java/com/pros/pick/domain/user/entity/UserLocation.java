@@ -17,14 +17,14 @@ public class UserLocation {
 	@GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
 	private Long id;
 
+	private Double latitude;
+
+	private Double longitude;
+
 	private String address;
 
-	private String latitude;
-
-	private String longitude;
-
 	@Builder
-	public UserLocation(String address, String latitude, String longitude) {
+	public UserLocation(String address, Double latitude, Double longitude) {
 		this.address = address;
 		this.latitude = latitude;
 		this.longitude = longitude;

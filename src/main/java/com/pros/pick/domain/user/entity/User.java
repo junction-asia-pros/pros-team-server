@@ -2,8 +2,11 @@ package com.pros.pick.domain.user.entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User {
@@ -16,10 +19,19 @@ public class User {
 
 	private String birthday;
 
-	private String age;
+	private Integer age;
 
 	private String deviceKey;
 
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private UserLocation userLocation;
+
+	@Builder
+	public User(String username, String birthday, Integer age, String deviceKey, UserLocation userLocation) {
+		this.username = username;
+		this.birthday = birthday;
+		this.age = age;
+		this.deviceKey = deviceKey;
+		this.userLocation = userLocation;
+	}
 }
