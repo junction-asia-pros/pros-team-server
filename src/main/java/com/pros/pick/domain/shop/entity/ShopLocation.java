@@ -1,7 +1,7 @@
 package com.pros.pick.domain.shop.entity;
 
+import com.pros.pick.domain.shop.dto.ShopLocationResponseDto;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -26,5 +26,12 @@ public class ShopLocation {
     @Column(length = 30)
     private String address;
 
+    public static ShopLocationResponseDto toDto(ShopLocation shopLocation){
+        return ShopLocationResponseDto.builder()
+                .longitude(shopLocation.getLongitude())
+                .latitude(shopLocation.getLatitude())
+                .address(shopLocation.getAddress())
+                .build();
+    }
 
 }

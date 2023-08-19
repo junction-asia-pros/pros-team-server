@@ -2,13 +2,15 @@ package com.pros.pick.domain.shop.entity;
 
 import com.pros.pick.domain.bowl.entity.Bowl;
 import com.pros.pick.domain.shop.dto.ShopDto;
-import com.pros.pick.domain.shop.dto.ShopListResponseDto;
+import com.pros.pick.domain.shop.dto.shoplist.ShopListResponseDto;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import static jakarta.persistence.CascadeType.ALL;
 import static jakarta.persistence.GenerationType.*;
@@ -34,8 +36,8 @@ public class Shop {
     private ShopLocation shopLocation;
 
     //bowl:shop n:1
-//    @OneToMany(mappedBy = "shop", cascade = ALL)
-//    private List<Bowl> list = new ArrayList<>();
+    @OneToMany(mappedBy = "shop", cascade = ALL)
+    private List<Bowl> list = new ArrayList<>();
 
     //    용기 타입: abc
     @Column
@@ -71,12 +73,17 @@ public class Shop {
         return ShopListResponseDto.builder()
                 .name(shop.getName())
                 .image(shop.getImage())
-                .shopLocation(shop.getShopLocation())
-                .bowlType(shop.getBowlType())
-                .receiveStatus(shop.isReceiveStatus())
+                .shopLocationResponseDto(ShopLocation.toDto(shop.getShopLocation()))
+                .bowlTypeAndCount(shop.getList().stream()
+                        .flatMap(bowl -> bowl.getBowlCountList().entrySet().stream())
+                        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)))
                 .build();
-
+//                .flatMap(bowl -> bowl.getBowlSizeCounts().entrySet().stream())
+//                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, Integer::sum)));
+//                .build();
     }
+
+
 
 //    public static ShopDto toDto
 

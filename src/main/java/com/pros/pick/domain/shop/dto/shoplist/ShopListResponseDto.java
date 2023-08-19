@@ -1,12 +1,14 @@
-package com.pros.pick.domain.shop.dto;
+package com.pros.pick.domain.shop.dto.shoplist;
 
 import com.pros.pick.domain.bowl.entity.Bowl;
+import com.pros.pick.domain.shop.dto.ShopLocationResponseDto;
 import com.pros.pick.domain.shop.entity.ShopLocation;
 import lombok.*;
 
 import java.sql.Blob;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -17,9 +19,11 @@ public class ShopListResponseDto {
 
     private Blob image;
 
-    private ShopLocation shopLocation;
+    private ShopLocationResponseDto shopLocationResponseDto;
 
-    private String bowlType;
+    private Map<String, Integer> bowlTypeAndCount = new HashMap<>();
 
-    private boolean receiveStatus;
+//    private List<BowlShopListResponseDto> list;
+
+
 }

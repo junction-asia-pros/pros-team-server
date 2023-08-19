@@ -1,12 +1,11 @@
 package com.pros.pick.domain.shop.controller;
 
 import com.pros.pick.domain.shop.dto.ShopDto;
-import com.pros.pick.domain.shop.dto.ShopListResponseDto;
+import com.pros.pick.domain.shop.dto.shoplist.ShopListResponseDto;
 import com.pros.pick.domain.shop.service.ShopService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +20,7 @@ public class ShopController {
     private final ShopService shopService;
 
     @Operation(summary = "create and save shop")
-    @PostMapping("/createShop")
+    @PostMapping("")
     public ResponseEntity<Long> createShop(@RequestBody @Valid final ShopDto shopDto,
                                            BindingResult bindingResult){
         ResponseEntity<BindingResult> checkViaBindingResult = checkViaBindingResult(bindingResult);
@@ -52,7 +51,7 @@ public class ShopController {
         return ResponseEntity.noContent().build();
     }
 
-    @Operation(summary = "list all shops")
+    @Operation(summary = "list all shops that rider selected")
     @GetMapping("")
     public ResponseEntity<List<ShopListResponseDto>> listAllShops(){
         return ResponseEntity.ok(shopService.listAllShops());

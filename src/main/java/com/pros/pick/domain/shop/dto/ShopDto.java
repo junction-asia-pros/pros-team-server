@@ -24,7 +24,7 @@ public class ShopDto {
 
     private ShopLocation shopLocation;
 
-//    private List<Bowl> list = new ArrayList<>();
+    private List<Bowl> list = new ArrayList<>();
 
     private String bowlType;
 
