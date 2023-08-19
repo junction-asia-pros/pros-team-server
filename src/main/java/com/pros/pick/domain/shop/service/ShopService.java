@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -68,4 +69,10 @@ public class ShopService {
     public void removeBowlFromQueue(final String bowlType, List<ShopListResponseDto> list){
         list.removeIf(shopListResponseDto -> shopListResponseDto.getBowlType().equals(bowlType));
     }
+
+    public Shop findById(final long shopId){
+        Optional<Shop> optionalShop = shopRepository.findById(shopId);
+        return optionalShop.get();
+    }
+
 }
