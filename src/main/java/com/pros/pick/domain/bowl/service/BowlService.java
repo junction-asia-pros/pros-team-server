@@ -32,7 +32,7 @@ public class BowlService {
 		dto.setId(bowl.getId());
 		dto.setRestaurantName(bowl.getRestaurantName());
 		dto.setRestaurantAddress(bowl.getRestaurantAddress());
-		dto.setCollectionSstatus(bowl.isCollectionStatus());
+		dto.setCollectionStatus(bowl.isCollectionStatus());
 		dto.setType(bowl.getType());
 		dto.setWeight(bowl.getWeight());
 		dto.setDish(bowl.getDish());
@@ -40,10 +40,17 @@ public class BowlService {
 		if (bowl.getBowlLocation() != null) {
 			dto.setLatitude(bowl.getBowlLocation().getLatitude());
 			dto.setLongitude(bowl.getBowlLocation().getLongitude());
-			dto.setOpenAddress1(bowl.getBowlLocation().getOrderAddress1());
-			dto.setOpenAddress2(bowl.getBowlLocation().getOrderAddress2());
+			dto.setOrderAddress1(bowl.getBowlLocation().getOrderAddress1());
+			dto.setOrderAddress2(bowl.getBowlLocation().getOrderAddress2());
 		}
 		return dto;
+	}
+
+	@Transactional(readOnly = true)
+	public BowlResponseDto getBowl(Long id) {
+		Bowl bowl = bowlRepository.findById(id)
+				.orElseThrow(() -> new EntityNotFoundException("Bowl not found with id: " + id));
+		return convertToDto(bowl);
 	}
 
 	@Transactional
@@ -68,6 +75,7 @@ public class BowlService {
 		bowlRepository.save(bowl);
 	}
 
+	@Transactional
 	public void delete(Long id) {
 		Bowl bowl = bowlRepository.findById(id)
 				.orElseThrow(() -> new EntityNotFoundException("Bowl not found with id: " + id));

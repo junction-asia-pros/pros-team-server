@@ -19,10 +19,17 @@ public class BowlController {
 
 	private final BowlService bowlService;
 
-	@Operation(summary = "수거용 다회 용기 목록 조회")
+	@Operation(summary = "수거용 다회 용기 전체 목록 조회")
 	@GetMapping()
 	public ResponseEntity<List<BowlResponseDto>> getAllBowls() {
 		List<BowlResponseDto> response = bowlService.getAllBowls();
+		return ResponseEntity.ok(response);
+	}
+
+	@Operation(summary = "수거용 다회 용기 상세 조회")
+	@GetMapping("/{id}")
+	public ResponseEntity<BowlResponseDto> getBowls(@PathVariable Long id) {
+		BowlResponseDto response = bowlService.getBowl(id);
 		return ResponseEntity.ok(response);
 	}
 
