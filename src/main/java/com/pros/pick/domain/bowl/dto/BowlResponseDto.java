@@ -1,5 +1,6 @@
 package com.pros.pick.domain.bowl.dto;
 
+import com.pros.pick.domain.bowl.entity.vo.CollectState;
 import com.pros.pick.domain.bowl.entity.vo.Dish;
 import lombok.Getter;
 import lombok.Setter;
@@ -16,6 +17,7 @@ public class BowlResponseDto {
 	private String restaurantAddress;
 	private boolean collectionStatus;
 	private String collectorKey; // 사용자 Device Key
+	private CollectState collectState;
 	private String type;
 	private int weight;
 	private Dish dish;

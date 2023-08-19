@@ -6,7 +6,6 @@ import com.pros.pick.domain.shop.dto.list.ShopListResponseDto;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -20,37 +19,41 @@ import static lombok.AccessLevel.PROTECTED;
 @NoArgsConstructor(access = PROTECTED)
 @Getter
 public class Shop {
+
     @Id
     @GeneratedValue(strategy = IDENTITY)
     @Column(name = "shop_id")
     private Long id;
 
+    // 가게명
     @Column(nullable = false)
     private String name;
 
-    @Lob
-    private Blob image;
+    // 가게 이미지
+    private String imageUrl;
 
+    // 가게 위치 정보
     @OneToOne
     @JoinColumn(name="shop_location_id")
     private ShopLocation shopLocation;
 
-    //bowl:shop n:1
+    // 가게의 다회용 그릇
     @OneToMany(mappedBy = "shop", cascade = ALL)
     private List<Bowl> list = new ArrayList<>();
 
-    //    용기 타입: abc
+    // 다회용 그룹 타입 - 현재 미사용
     @Column
     private String bowlType;
 
+    // 반납 상태
     @Column
     private boolean receiveStatus;
 
     @Builder
-    public Shop(Long id, String name, Blob image, ShopLocation shopLocation,  String bowlType, boolean receiveStatus) {
+    public Shop(Long id, String name, String image, ShopLocation shopLocation,  String bowlType, boolean receiveStatus) {
         this.id = id;
         this.name = name;
-        this.image = image;
+        this.imageUrl = imageUrl;
         this.shopLocation = shopLocation;
 //        this.list = list;
         this.bowlType = bowlType;
@@ -61,7 +64,7 @@ public class Shop {
         return Shop.builder()
                 .id(shopDto.getId())
                 .name(shopDto.getName())
-                .image(shopDto.getImage())
+                .image(shopDto.getImageUrl())
                 .shopLocation(shopDto.getShopLocation())
 //                .list(shopDto.getList())
                 .bowlType(shopDto.getBowlType())
@@ -72,7 +75,7 @@ public class Shop {
     public static ShopListResponseDto toListResponseDto(Shop shop){
         return ShopListResponseDto.builder()
                 .name(shop.getName())
-                .image(shop.getImage())
+                .imageUrl(shop.getImageUrl())
                 .shopLocationResponseDto(ShopLocation.toDto(shop.getShopLocation()))
                 .bowlTypeAndCount(shop.getList().stream()
                         .flatMap(bowl -> bowl.getBowlCountList().entrySet().stream())
@@ -88,7 +91,7 @@ public class Shop {
 
     public void updateShopDetails(ShopDto shopDto){
         this.name = shopDto.getName();
-        this.image = shopDto.getImage();
+        this.imageUrl = shopDto.getImageUrl();
         this.shopLocation = shopDto.getShopLocation();
 //        this.list = shopDto.getList();
     }
