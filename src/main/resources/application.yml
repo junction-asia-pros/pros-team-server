@@ -2,8 +2,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/pros_db
-    username: ${USER_NAME}
-    password: ${PASSWORD}
+    username: localhost
+    password: seahawk007
     hikari:
       minimum-idle: 10
       maximum-pool-size: 20
