@@ -21,9 +21,8 @@ public class User {
 	private String birthday;
 
 	private Integer age;
-	private int accumulatedPointReward;
 
-	private String age;
+//	private int accumulatedPointReward;
 
 	private String deviceKey;
 
@@ -31,15 +30,14 @@ public class User {
 	private UserLocation userLocation;
 
 	@Builder
-	public User(String username, String birthday, Integer age, String deviceKey, UserLocation userLocation) {
+	public User(Long id, String username, String birthday, Integer age, String deviceKey, UserLocation userLocation) {
+		this.id = id;
 		this.username = username;
 		this.birthday = birthday;
 		this.age = age;
+//		this.accumulatedPointReward = accumulatedPointReward;
 		this.deviceKey = deviceKey;
 		this.userLocation = userLocation;
 	}
 
-	public void updatePointReward(UserRewardDto userRewardDto){
-
-	}
 }
