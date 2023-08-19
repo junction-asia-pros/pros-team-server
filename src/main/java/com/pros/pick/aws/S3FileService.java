@@ -5,10 +5,12 @@ import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -35,5 +37,10 @@ public class S3FileService {
 
     public void deleteFile(String fileName){
         amazonS3.deleteObject(new DeleteObjectRequest(bucket, fileName));
+    }
+
+    public String getImageUrl(String imageName){
+        URL url = amazonS3.getUrl("street-drop", imageName);
+        return url.toString() + ".png";
     }
 }

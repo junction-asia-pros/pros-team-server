@@ -1,6 +1,9 @@
 package com.pros.pick.domain.shop.entity;
 
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3Client;
 import com.pros.pick.aws.S3FileController;
+import com.pros.pick.aws.S3FileService;
 import com.pros.pick.domain.bowl.entity.Bowl;
 import com.pros.pick.domain.shop.dto.ShopDto;
 import com.pros.pick.domain.shop.dto.list.ShopListResponseDto;
@@ -51,7 +54,6 @@ public class Shop {
     @Column
     private boolean receiveStatus;
 
-
     @Builder
     public Shop(Long id, String name, String imageUrl, ShopLocation shopLocation,  String bowlType, boolean receiveStatus) {
         this.id = id;
@@ -75,10 +77,15 @@ public class Shop {
                 .build();
     }
 
+//    S3FileService s3FileService = new S3FileService(AmazonS3);
+
     public static ShopListResponseDto toListResponseDto(Shop shop){
+        AmazonS3 amazonS3 = new AmazonS3Client();
+        S3FileService s3FileService = new S3FileService(amazonS3);
+        
         return ShopListResponseDto.builder()
                 .name(shop.getName())
-                .imageUrl(shop.getImageUrl())
+                .imageUrl(s3FileService.getImageUrl(shop.getId().toString()))
                 .shopLocationResponseDto(ShopLocation.toDto(shop.getShopLocation()))
                 .bowlTypeAndCount(shop.getList().stream()
                         .flatMap(bowl -> bowl.getBowlCountList().entrySet().stream())

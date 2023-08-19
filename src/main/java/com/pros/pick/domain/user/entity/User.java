@@ -28,6 +28,7 @@ public class User {
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private UserLocation userLocation;
 
+
 	@Builder
 	public User(String username, String birthday, Integer age, String deviceKey, UserLocation userLocation) {
 		this.username = username;
