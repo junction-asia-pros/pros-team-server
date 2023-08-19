@@ -17,4 +17,6 @@ public class UserRequestDto {
 
 	private UserLocationDto userLocation;
 
+	private int accumulatedPointReward;
+
 }
