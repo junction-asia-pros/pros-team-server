@@ -34,8 +34,8 @@ public class Shop {
     private ShopLocation shopLocation;
 
     //bowl:shop n:1
-    @OneToMany(mappedBy = "shop", cascade = ALL)
-    private List<Bowl> list = new ArrayList<>();
+//    @OneToMany(mappedBy = "shop", cascade = ALL)
+//    private List<Bowl> list = new ArrayList<>();
 
     //    용기 타입: abc
     @Column
@@ -45,12 +45,12 @@ public class Shop {
     private boolean receiveStatus;
 
     @Builder
-    public Shop(Long id, String name, Blob image, ShopLocation shopLocation, List<Bowl> list, String bowlType, boolean receiveStatus) {
+    public Shop(Long id, String name, Blob image, ShopLocation shopLocation,  String bowlType, boolean receiveStatus) {
         this.id = id;
         this.name = name;
         this.image = image;
         this.shopLocation = shopLocation;
-        this.list = list;
+//        this.list = list;
         this.bowlType = bowlType;
         this.receiveStatus = receiveStatus;
     }
@@ -61,7 +61,7 @@ public class Shop {
                 .name(shopDto.getName())
                 .image(shopDto.getImage())
                 .shopLocation(shopDto.getShopLocation())
-                .list(shopDto.getList())
+//                .list(shopDto.getList())
                 .bowlType(shopDto.getBowlType())
                 .receiveStatus(shopDto.isReceiveStatus())
                 .build();
@@ -84,7 +84,7 @@ public class Shop {
         this.name = shopDto.getName();
         this.image = shopDto.getImage();
         this.shopLocation = shopDto.getShopLocation();
-        this.list = shopDto.getList();
+//        this.list = shopDto.getList();
     }
 
     public void updateBowlReceiveStatus(String bowlType){
