@@ -80,7 +80,7 @@ public class BowlService {
 		Bowl bowl = bowlRepository.findById(id)
 				.orElseThrow(() -> new EntityNotFoundException("Bowl not found with id: " + id));
 		Bowl changedBowl = bowl.changeCollectionStatus(true);
-		return convertToDto(bowl);
+		return convertToDto(changedBowl);
 	}
 
 	@Transactional
