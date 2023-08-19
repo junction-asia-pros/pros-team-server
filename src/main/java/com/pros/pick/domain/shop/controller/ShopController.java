@@ -1,5 +1,6 @@
 package com.pros.pick.domain.shop.controller;
 
+import com.pros.pick.aws.S3FileController;
 import com.pros.pick.domain.shop.dto.ShopDto;
 import com.pros.pick.domain.shop.dto.list.ShopListResponseDto;
 import com.pros.pick.domain.shop.service.ShopService;
@@ -18,6 +19,8 @@ import java.util.List;
 public class ShopController {
 
     private final ShopService shopService;
+
+    private final S3FileController s3FileController;
 
     @Operation(summary = "create and save shop")
     @PostMapping("")

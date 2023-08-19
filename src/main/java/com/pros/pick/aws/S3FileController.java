@@ -42,11 +42,10 @@ public class S3FileController {
     }
 
     @Operation(summary = "get image url")
-    @GetMapping("/{shop-id}")
-    public ResponseEntity<String> getShopImage(@PathVariable("shop-id") long shopId) {
-        Shop shop = shopService.findById(shopId);
-        URL url = s3Client.getUrl("bucketname", Long.toString(shopId));
-        String urltext = ""+url;
-        return ResponseEntity.ok(url.toString());
+    @GetMapping("/get/{shop-id}")
+    public ResponseEntity<String> getShopImage(@PathVariable("shop-id") String shopId) {
+//        Shop shop = shopService.findById(shopId);
+        URL url = s3Client.getUrl("street-drop", shopId);
+        return ResponseEntity.ok(url.toString() + ".png");
     }
 }

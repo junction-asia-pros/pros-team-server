@@ -21,7 +21,7 @@ public class S3FileService {
 
     public String upload(MultipartFile multipartFile) throws IOException {
         //for saved file in s3 to have unique names via UUID.randomUUID()
-        String s3FileName = UUID.randomUUID() + "-" + multipartFile.getOriginalFilename();
+        String s3FileName = multipartFile.getOriginalFilename();
 
         //inform file's size via ContentLength to S3
         ObjectMetadata objMeta = new ObjectMetadata();

@@ -1,10 +1,12 @@
 package com.pros.pick.domain.shop.entity;
 
+import com.pros.pick.aws.S3FileController;
 import com.pros.pick.domain.bowl.entity.Bowl;
 import com.pros.pick.domain.shop.dto.ShopDto;
 import com.pros.pick.domain.shop.dto.list.ShopListResponseDto;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,8 +51,9 @@ public class Shop {
     @Column
     private boolean receiveStatus;
 
+
     @Builder
-    public Shop(Long id, String name, String image, ShopLocation shopLocation,  String bowlType, boolean receiveStatus) {
+    public Shop(Long id, String name, String imageUrl, ShopLocation shopLocation,  String bowlType, boolean receiveStatus) {
         this.id = id;
         this.name = name;
         this.imageUrl = imageUrl;
@@ -64,7 +67,7 @@ public class Shop {
         return Shop.builder()
                 .id(shopDto.getId())
                 .name(shopDto.getName())
-                .image(shopDto.getImageUrl())
+                .imageUrl(shopDto.getImageUrl())
                 .shopLocation(shopDto.getShopLocation())
 //                .list(shopDto.getList())
                 .bowlType(shopDto.getBowlType())
