@@ -3,8 +3,11 @@ package com.pros.pick.domain.user.entity;
 import com.pros.pick.domain.user.dto.UserRewardDto;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User {
@@ -17,6 +20,7 @@ public class User {
 
 	private String birthday;
 
+	private Integer age;
 	private int accumulatedPointReward;
 
 	private String age;
@@ -25,6 +29,15 @@ public class User {
 
 	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private UserLocation userLocation;
+
+	@Builder
+	public User(String username, String birthday, Integer age, String deviceKey, UserLocation userLocation) {
+		this.username = username;
+		this.birthday = birthday;
+		this.age = age;
+		this.deviceKey = deviceKey;
+		this.userLocation = userLocation;
+	}
 
 	public void updatePointReward(UserRewardDto userRewardDto){
 

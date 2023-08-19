@@ -15,6 +15,7 @@ public class BowlResponseDto {
 	private String restaurantName;
 	private String restaurantAddress;
 	private boolean collectionStatus;
+	private String collectorKey; // 사용자 Device Key
 	private String type;
 	private int weight;
 	private Dish dish;
