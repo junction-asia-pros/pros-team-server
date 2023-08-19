@@ -4,6 +4,7 @@ import com.pros.pick.domain.bowl.dto.BowlRequestDto;
 import com.pros.pick.domain.bowl.dto.BowlResponseDto;
 import com.pros.pick.domain.bowl.entity.Bowl;
 import com.pros.pick.domain.bowl.entity.BowlLocation;
+import com.pros.pick.domain.bowl.entity.vo.CollectState;
 import com.pros.pick.domain.bowl.repository.BowlRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -32,7 +33,7 @@ public class BowlService {
 		dto.setId(bowl.getId());
 		dto.setRestaurantName(bowl.getRestaurantName());
 		dto.setRestaurantAddress(bowl.getRestaurantAddress());
-		dto.setCollectionStatus(bowl.isCollectionStatus());
+		dto.setCollectState(bowl.getCollectState());
 		dto.setType(bowl.getType());
 		dto.setWeight(bowl.getWeight());
 		dto.setDish(bowl.getDish());
@@ -69,6 +70,7 @@ public class BowlService {
 				.restaurantAddress(requestDto.getRestaurantAddress())
 				.type(requestDto.getType())
 				.weight(requestDto.getWeight())
+				.collectState(CollectState.WAITING)
 				.dish(requestDto.getDish())
 				.build();
 
@@ -79,7 +81,7 @@ public class BowlService {
 	public BowlResponseDto update(Long id) {
 		Bowl bowl = bowlRepository.findById(id)
 				.orElseThrow(() -> new EntityNotFoundException("Bowl not found with id: " + id));
-		Bowl changedBowl = bowl.changeCollectionStatus(true);
+		Bowl changedBowl = bowl.changeCollectState(CollectState.COLLECTING);
 		return convertToDto(changedBowl);
 	}
 

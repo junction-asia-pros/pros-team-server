@@ -1,6 +1,5 @@
 package com.pros.pick.domain.user.entity;
 
-import com.pros.pick.domain.user.dto.UserRewardDto;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -21,9 +20,8 @@ public class User {
 	private String birthday;
 
 	private Integer age;
-	private int accumulatedPointReward;
 
-	private String age;
+	private int accumulatedPointReward;
 
 	private String deviceKey;
 
@@ -37,9 +35,5 @@ public class User {
 		this.age = age;
 		this.deviceKey = deviceKey;
 		this.userLocation = userLocation;
-	}
-
-	public void updatePointReward(UserRewardDto userRewardDto){
-
 	}
 }

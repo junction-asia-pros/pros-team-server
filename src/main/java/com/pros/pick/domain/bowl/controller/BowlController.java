@@ -40,7 +40,7 @@ public class BowlController {
 		return ResponseEntity.ok().build();
 	}
 
-	@Operation(summary = "수거용 다회 용기 수정 - 수령하기 버튼 클릭 시")
+	@Operation(summary = "수거용 다회 용기 수정 - 수령하기")
 	@PatchMapping("/{id}")
 	public ResponseEntity<BowlResponseDto> update(@PathVariable Long id) {
 		var response = bowlService.update(id);
