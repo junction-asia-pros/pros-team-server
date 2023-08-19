@@ -10,11 +10,11 @@ public class BowlResponseDto {
 	private Long id;
 	private Double longitude;
 	private Double latitude;
-	private String openAddress1;
-	private String openAddress2;
+	private String orderAddress1;
+	private String orderAddress2;
 	private String restaurantName;
 	private String restaurantAddress;
-	private boolean collectionSstatus;
+	private boolean collectionStatus;
 	private String type;
 	private int weight;
 	private Dish dish;
