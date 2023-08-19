@@ -1,7 +1,7 @@
 package com.pros.pick.domain.shop.controller;
 
 import com.pros.pick.domain.shop.dto.ShopDto;
-import com.pros.pick.domain.shop.dto.shoplist.ShopListResponseDto;
+import com.pros.pick.domain.shop.dto.list.ShopListResponseDto;
 import com.pros.pick.domain.shop.service.ShopService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
@@ -38,14 +38,14 @@ public class ShopController {
     }
 
     @Operation(summary = "edit regular shop details")
-    @PutMapping("/editShopRegularDetails/{id}")
+    @PutMapping("/edit/regulardetails/{id}")
     public ResponseEntity<Void> editShopRegularDetails(@PathVariable final Long id, @RequestBody @Valid final ShopDto shopDto){
         shopService.updateShopDetails(shopDto);
         return ResponseEntity.noContent().build();
     }
 
     @Operation(summary = "edit bowl received status")
-    @PutMapping("/editShopBowlReceiveStatus/{id}")
+    @PutMapping("/edit/receiveStatus/{id}")
     public ResponseEntity<Void> editShopBowlReceiveStatus(@PathVariable final Long id, @RequestBody @Valid final ShopDto shopDto){
         shopService.updateBowlReceiveStatus(shopDto.getBowlType());
         return ResponseEntity.noContent().build();
@@ -55,6 +55,13 @@ public class ShopController {
     @GetMapping("")
     public ResponseEntity<List<ShopListResponseDto>> listAllShops(){
         return ResponseEntity.ok(shopService.listAllShops());
+    }
+
+    @Operation(summary = "deque an ended task")
+    @PutMapping("/deque")
+    public ResponseEntity<Void> dequeBowlTaskWhenApproved(final String bowlType, List<ShopListResponseDto> list){
+        shopService.removeBowlFromQueue(bowlType,list);
+        return ResponseEntity.noContent().build();
     }
 
     @Operation(summary = "delete one shop")

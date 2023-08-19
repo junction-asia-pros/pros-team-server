@@ -1,7 +1,7 @@
 package com.pros.pick.domain.shop.service;
 
 import com.pros.pick.domain.shop.dto.ShopDto;
-import com.pros.pick.domain.shop.dto.shoplist.ShopListResponseDto;
+import com.pros.pick.domain.shop.dto.list.ShopListResponseDto;
 import com.pros.pick.domain.shop.entity.Shop;
 import com.pros.pick.domain.shop.repository.ShopRepository;
 import lombok.RequiredArgsConstructor;
@@ -63,5 +63,9 @@ public class ShopService {
         return list.stream()
                 .map(shop -> Shop.toListResponseDto(shop))
                 .collect(Collectors.toList());
+    }
+
+    public void removeBowlFromQueue(final String bowlType, List<ShopListResponseDto> list){
+        list.removeIf(shopListResponseDto -> shopListResponseDto.getBowlType().equals(bowlType));
     }
 }

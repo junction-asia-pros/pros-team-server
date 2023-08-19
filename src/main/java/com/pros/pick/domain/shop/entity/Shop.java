@@ -2,7 +2,7 @@ package com.pros.pick.domain.shop.entity;
 
 import com.pros.pick.domain.bowl.entity.Bowl;
 import com.pros.pick.domain.shop.dto.ShopDto;
-import com.pros.pick.domain.shop.dto.shoplist.ShopListResponseDto;
+import com.pros.pick.domain.shop.dto.list.ShopListResponseDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -77,13 +77,12 @@ public class Shop {
                 .bowlTypeAndCount(shop.getList().stream()
                         .flatMap(bowl -> bowl.getBowlCountList().entrySet().stream())
                         .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue)))
+                .bowlType(shop.getBowlType())
                 .build();
 //                .flatMap(bowl -> bowl.getBowlSizeCounts().entrySet().stream())
 //                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, Integer::sum)));
 //                .build();
     }
-
-
 
 //    public static ShopDto toDto
 

@@ -1,4 +1,4 @@
-package com.pros.pick.domain.shop.dto.shoplist;
+package com.pros.pick.domain.shop.dto.list;
 
 import com.pros.pick.domain.shop.entity.ShopLocation;
 import lombok.*;

@@ -1,13 +1,10 @@
-package com.pros.pick.domain.shop.dto.shoplist;
+package com.pros.pick.domain.shop.dto.list;
 
-import com.pros.pick.domain.bowl.entity.Bowl;
 import com.pros.pick.domain.shop.dto.ShopLocationResponseDto;
-import com.pros.pick.domain.shop.entity.ShopLocation;
 import lombok.*;
 
 import java.sql.Blob;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 @Getter
@@ -23,7 +20,7 @@ public class ShopListResponseDto {
 
     private Map<String, Integer> bowlTypeAndCount = new HashMap<>();
 
-//    private List<BowlShopListResponseDto> list;
+    private String bowlType;
 
 
 }
