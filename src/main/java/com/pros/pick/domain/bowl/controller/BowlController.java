@@ -29,7 +29,7 @@ public class BowlController {
 	@Operation(summary = "수거용 다회 용기 상세 조회")
 	@GetMapping("/{id}")
 	public ResponseEntity<BowlResponseDto> getBowls(@PathVariable Long id) {
-		BowlResponseDto response = bowlService.getBowl(id);
+		var response = bowlService.getBowl(id);
 		return ResponseEntity.ok(response);
 	}
 
@@ -38,6 +38,13 @@ public class BowlController {
 	public ResponseEntity<BowlResponseDto> create(@RequestBody BowlRequestDto requestDto) {
 		bowlService.create(requestDto);
 		return ResponseEntity.ok().build();
+	}
+
+	@Operation(summary = "수거용 다회 용기 수정 - 수령하기 버튼 클릭 시")
+	@PatchMapping("/{id}")
+	public ResponseEntity<BowlResponseDto> update(@PathVariable Long id) {
+		var response = bowlService.update(id);
+		return ResponseEntity.ok(response);
 	}
 
 	@Operation(summary = "수거용 다회 용기 삭제")

@@ -47,4 +47,9 @@ public class Bowl {
 		this.weight = weight;
 		this.dish = dish;
 	}
+
+	public Bowl changeCollectionStatus(boolean collectionStatus) {
+		this.collectionStatus = collectionStatus;
+		return this;
+	}
 }

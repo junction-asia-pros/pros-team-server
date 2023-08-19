@@ -76,6 +76,14 @@ public class BowlService {
 	}
 
 	@Transactional
+	public BowlResponseDto update(Long id) {
+		Bowl bowl = bowlRepository.findById(id)
+				.orElseThrow(() -> new EntityNotFoundException("Bowl not found with id: " + id));
+		Bowl changedBowl = bowl.changeCollectionStatus(true);
+		return convertToDto(bowl);
+	}
+
+	@Transactional
 	public void delete(Long id) {
 		Bowl bowl = bowlRepository.findById(id)
 				.orElseThrow(() -> new EntityNotFoundException("Bowl not found with id: " + id));
