@@ -78,10 +78,10 @@ public class BowlService {
 	}
 
 	@Transactional
-	public BowlResponseDto update(Long id) {
+	public BowlResponseDto update(Long id, CollectState collectState) {
 		Bowl bowl = bowlRepository.findById(id)
 				.orElseThrow(() -> new EntityNotFoundException("Bowl not found with id: " + id));
-		Bowl changedBowl = bowl.changeCollectState(CollectState.COLLECTING);
+		Bowl changedBowl = bowl.changeCollectState(collectState);
 		return convertToDto(changedBowl);
 	}
 

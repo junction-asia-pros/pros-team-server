@@ -20,7 +20,7 @@ public class ShopDto {
 
     private String name;
 
-    private Blob image;
+    private String imageUrl;
 
     private ShopLocation shopLocation;
 

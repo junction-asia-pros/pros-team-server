@@ -2,6 +2,7 @@ package com.pros.pick.domain.bowl.controller;
 
 import com.pros.pick.domain.bowl.dto.BowlRequestDto;
 import com.pros.pick.domain.bowl.dto.BowlResponseDto;
+import com.pros.pick.domain.bowl.entity.vo.CollectState;
 import com.pros.pick.domain.bowl.service.BowlService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -40,10 +41,13 @@ public class BowlController {
 		return ResponseEntity.ok().build();
 	}
 
-	@Operation(summary = "수거용 다회 용기 수정 - 수령하기")
+	@Operation(summary = "수거용 다회 용기 수정 - 수령 또는 반납")
 	@PatchMapping("/{id}")
-	public ResponseEntity<BowlResponseDto> update(@PathVariable Long id) {
-		var response = bowlService.update(id);
+	public ResponseEntity<BowlResponseDto> update(
+			@PathVariable Long id,
+			@RequestParam CollectState collectState
+	) {
+		var response = bowlService.update(id, collectState);
 		return ResponseEntity.ok(response);
 	}
 

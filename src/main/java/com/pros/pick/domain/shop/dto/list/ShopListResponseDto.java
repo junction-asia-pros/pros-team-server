@@ -14,7 +14,7 @@ import java.util.Map;
 public class ShopListResponseDto {
     private String name;
 
-    private Blob image;
+    private String imageUrl;
 
     private ShopLocationResponseDto shopLocationResponseDto;
 
